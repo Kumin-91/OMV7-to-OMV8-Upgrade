@@ -12,7 +12,7 @@ ZFS는 커널 의존성이 높은 특성을 가지므로, 업그레이드 과정
 
 ## 🎯 Target
 
-**Debian 12 with OMV 7 시스템을 Debian 13 with OMV8로 업그레이드**  
+**Debian 12 with OMV 7 시스템을 Debian 13 with OMV 8으로 업그레이드**  
 **Proxmox VE 8 (6.11) Kernel을 Proxmox VE 9 (6.14) Kernel로 업그레이드**  
 
 ## 🗿 Migration Strategy
@@ -105,7 +105,7 @@ sudo apt update && sudo apt upgrade -y
 * **[Trouble Shooting: Docker Repository 404 Not Found](./Troubleshooting/02_404_Not_Found.md)**  
     * **2026년 01월 03일 해당 이슈는 더 이상 발생하지 않음을 확인**  
 
-* **PVE 9 (6.14) 커널 설치: `Web GUI System > OMV-Extras > Kernel`에서 Proxmox VE 커널을 설치하고 재부팅합니다. 필요에 따라 PVE 9.1 (6.17)을 설치합니다.**  
+* **PVE 9 (6.14) 커널 설치: `Web GUI System > Kernel`에서 Proxmox VE 커널을 설치하고 재부팅합니다. 필요에 따라 PVE 9.1 (6.17)을 설치합니다.**  
 
 * **ZFS 플러그인 재설치: OMV 8용 ZFS 플러그인을 다시 설치하여 새 커널에 맞는 모듈을 빌드합니다.**  
 
