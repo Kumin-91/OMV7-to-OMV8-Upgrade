@@ -21,7 +21,7 @@ E: Unable to fetch some archives, maybe run apt-get update or try with --fix-mis
 
 * **[저장소](https://download.docker.com/linux/debian/dists/trixie/pool/stable/amd64/)에 존재하는 2.2.0-2 버전 지정 설치**  
 
-![Repo](./Images/02_1.png)
+![Repo](/Images/02_1.png)
 
 ```bash
 sudo apt install containerd.io=2.2.0-2~debian.13~trixie

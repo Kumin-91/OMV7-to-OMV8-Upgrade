@@ -3,6 +3,13 @@
 본 문서는 ZFS를 주 파일시스템으로 사용하는 OpenMediaVault(OMV) 서버의 메이저 업그레이드 과정을 기록합니다.  
 ZFS는 커널 의존성이 높은 특성을 가지므로, 업그레이드 과정 중 커널 모듈(DKMS) 충돌을 방지하기 위해 플러그인 삭제 후 재설치 전략을 채택하였습니다.
 
+[![English](https://img.shields.io/badge/Language-English-blue?style=flat-square)](./translations/en/README.md)
+[![Japanese](https://img.shields.io/badge/Language-日本語-red?style=flat-square)](./translations/ja/README.md)
+
+> **Note:**  
+> **EN:** The English and Japanese translations in this document were generated using machine translation. In case of any discrepancies, the original Korean version shall prevail.  
+> **JP:** 本ドキュメントの英語および日本語表記には機械翻訳を使用しています。解釈に相違がある場合は、韓国語の原文を優先します。
+
 ## 🛠️ Environment
 
 - **OS: Debian 12 (Bookworm) with OMV 7**  
