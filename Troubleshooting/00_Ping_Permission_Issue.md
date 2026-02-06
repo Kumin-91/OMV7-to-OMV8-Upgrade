@@ -2,34 +2,34 @@
 
 * **`ping` 실행**  
 
-```Bash
+```bash
 ping google.com
 ```
 
-* **아래와 같은 에러 출력**  
+* **에러 메시지 확인**  
 
-```Plain Text
+```text
 ping: socktype: SOCK_RAW
 ping: socket: Operation not permitted
 ping: => missing cap_net_raw+p capability or setuid?
 ```
 
-* **`setcap` 명령어를 사용하여 `ping` 실행 파일에 필요한 권한 (Capability)을 수동으로 부여**  
+* **`ping` 실행 파일에 필요한 권한 (Capability) 부여**  
 
-```Bash
+```bash
 sudo setcap cap_net_raw+p /usr/bin/ping
 ```
 
 * **권한 설정 확인**  
 
-```Bash
+```bash
 sudo getcap /usr/bin/ping
 #출력: /usr/bin/ping cap_net_raw=p
 ```
 
-* **정상 실행**  
+* **정상 실행 확인**  
 
-```Plain Text
+```text
 PING google.com (142.250.196.14) 56(84) bytes of data.
 64 bytes from maa03s44-in-f14.1e100.net (142.250.196.14): icmp_seq=1 ttl=116 time=34.6 ms
 64 bytes from maa03s44-in-f14.1e100.net (142.250.196.14): icmp_seq=2 ttl=116 time=35.0 ms

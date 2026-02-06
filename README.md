@@ -33,14 +33,14 @@ ZFS는 커널 의존성이 높은 특성을 가지므로, 업그레이드 과정
 
 **업그레이드 중 데이터 쓰기 작업을 차단하고 시스템 자원을 확보합니다.**  
 
-* **SMB/SFTP 서비스 중지:** Web GUI를 이용하여 공유 서비스를 비활성화  
+* **SMB/SFTP 서비스 중지:** Web GUI를 이용하여 공유 서비스 비활성화  
 
-* **Docker 컨테이너 정지:** ZFS 데이터셋을 마운트하는 컨테이너를 종료  
+* **Docker 컨테이너 정지:** ZFS 데이터셋을 마운트하는 컨테이너 종료  
 
-```Bash
-#Docker Compose를 이용하는 경우
+```bash
+# Docker Compose를 이용하는 경우
 docker-compose down
-#Docker Container
+# Docker Container
 docker stop <CONTAINER_1> <CONTAINER_2> <CONTAINER_3> ...
 ```
 
@@ -48,9 +48,9 @@ docker stop <CONTAINER_1> <CONTAINER_2> <CONTAINER_3> ...
 
 **커널 모듈 업데이트 시 발생할 수 있는 데이터 손상을 방지하기 위해 풀(Pool)을 안전하게 분리합니다.**  
 
-* **ZFS Pool Export: 모든 풀을 언마운트하고 시스템으로부터 안전하게 내보내기 상태로 전환합니다.**  
+* **ZFS Pool Export:** 모든 풀을 언마운트하고 시스템으로부터 안전하게 내보내기 상태로 전환  
 
-```Bash
+```bash
 sudo zpool export -a
 ```
 
@@ -58,12 +58,12 @@ sudo zpool export -a
 
 **메이저 업그레이드 도중 구버전 ZFS 모듈과 새 커널 간의 빌드 충돌(DKMS Error)을 방지합니다.**  
 
-* **ZFS 플러그인 삭제: 설정값은 유지되지만, 커널 모듈 의존성을 끊기 위해 플러그인을 제거합니다.**  
+* **ZFS 플러그인 삭제:** 설정값은 유지되지만, 커널 모듈 의존성을 끊기 위해 플러그인 제거  
 
-```Bash
-#ZFS 플러그인 삭제
+```bash
+# ZFS 플러그인 삭제
 sudo apt remove openmediavault-zfs
-#의존성 패키지 삭제
+# 의존성 패키지 삭제
 sudo apt autoremove
 ```
 
@@ -71,20 +71,20 @@ sudo apt autoremove
 
 **Debian 12(Bookworm) 기반에서 Debian 13(Trixie) 기반의 OMV 8로 전환합니다.**  
 
-* **Release Upgrade: OMV 공식 업그레이드 도구를 실행합니다.**  
+* **Release Upgrade:** OMV 공식 업그레이드 도구 실행  
 
-```Bash
+```bash
 sudo omv-release-upgrade
-````
+```
 
-* **모든 과정이 완료되면 시스템을 재부팅합니다.**  
-```Bash
+* **모든 과정 완료 후 시스템 재부팅**  
+```bash
 sudo reboot now
 ```
 
-* **OMV-Extras 리포지토리 갱신: 새 OS 버전(Synchrony)에 맞는 플러그인 저장소를 재설정합니다.**  
+* **OMV-Extras 리포지토리 갱신:** 새 OS 버전(Synchrony)에 맞는 플러그인 저장소 재설정  
 
-```Bash
+```bash
 wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash
 ```
 
@@ -98,35 +98,35 @@ wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/
 
 * **시스템 업데이트**  
 
-```Bash
+```bash
 sudo apt update && sudo apt upgrade -y
 ```
 
 * **[Trouble Shooting: Docker Repository 404 Not Found](./Troubleshooting/02_404_Not_Found.md)**  
-    * **2026년 01월 03일 해당 이슈는 더 이상 발생하지 않음을 확인**  
+    > **Note:** 2026년 01월 03일 해당 이슈는 더 이상 발생하지 않음 확인
 
-* **PVE 9 (6.14) 커널 설치: `Web GUI System > Kernel`에서 Proxmox VE 커널을 설치하고 재부팅합니다. 필요에 따라 PVE 9.1 (6.17)을 설치합니다.**  
+* **PVE 9 (6.14) 커널 설치:** `Web GUI System > Kernel`에서 Proxmox VE 커널 설치 (필요시 PVE 9.1 / 6.17 설치) 및 재부팅  
 
-* **ZFS 플러그인 재설치: OMV 8용 ZFS 플러그인을 다시 설치하여 새 커널에 맞는 모듈을 빌드합니다.**  
+* **ZFS 플러그인 재설치:** OMV 8용 ZFS 플러그인을 다시 설치하여 새 커널에 맞는 모듈 빌드  
 
-```Bash
+```bash
 sudo apt install openmediavault-zfs
 ```
 
-* **ZFS Pool Import: 내보냈던 풀을 다시 시스템으로 불러옵니다.**  
+* **ZFS Pool Import:** 내보냈던 풀을 다시 시스템으로 불러오기  
 
-```Bash
-#ZFS Pool 검색 (모든 ZFS Pool이 뜨는지 확인)
+```bash
+# ZFS Pool 검색 (모든 ZFS Pool 표시 확인)
 sudo zpool import
-#특정 ZFS Pool Import
+# 특정 ZFS Pool Import
 sudo zpool import <POOL_NAME>
-#모든 ZFS Pool Import
+# 모든 ZFS Pool Import
 sudo zpool import -a
 ```
 
-* **부팅 심볼릭 링크 수정: /vmlinuz 및 /initrd.img가 구버전 커널을 가리키지 않도록 수동 업데이트합니다.**  
+* **부팅 심볼릭 링크 수정:** `/vmlinuz` 및 `/initrd.img`가 구버전 커널을 가리키지 않도록 수동 업데이트  
 
-```Bash
+```bash
 sudo ln -sf /boot/vmlinuz-6.14.11-5-pve /vmlinuz
 sudo ln -sf /boot/initrd.img-6.14.11-5-pve /initrd.img
 sudo update-grub
